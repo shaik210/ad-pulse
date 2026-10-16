@@ -1,0 +1,138 @@
+{
+  "users": {
+    "usr_default_admin": {
+      "userId": "usr_default_admin",
+      "email": "workspace@adpulse.local",
+      "name": "Dr. Sharma & Associates",
+      "activeWorkspaceId": "ws_primary_growth",
+      "createdAt": "2026-10-12T15:05:38.193Z"
+    }
+  },
+  "workspaces": {
+    "ws_primary_growth": {
+      "id": "ws_primary_growth",
+      "userId": "usr_default_admin",
+      "name": "Apex Laser & Dental Clinic",
+      "businessName": "Apex Laser & Dental Clinic",
+      "mode": "growth",
+      "geoCenter": "Green Park Extension, New Delhi",
+      "geoRadiusKm": 8,
+      "contactPhone": "+91 98111 22233",
+      "planId": "growth",
+      "createdAt": "2026-10-12T15:05:38.193Z",
+      "updatedAt": "2026-10-12T15:06:28.719Z"
+    }
+  },
+  "campaigns": {
+    "cmp_seed_01": {
+      "id": "cmp_seed_01",
+      "workspaceId": "ws_primary_growth",
+      "userId": "usr_default_admin",
+      "name": "Root Canal Painless Treatment Offer",
+      "type": "growth",
+      "category": "Dental Clinic",
+      "channel": "Instagram Reels & Feed",
+      "headline": "Painless Root Canal & Digital Smile Checkup",
+      "body": "Pain-free single-sitting RCT by certified MDS specialists. Free digital OPG X-ray consultation within 5km of Green Park.",
+      "location": "Green Park, New Delhi",
+      "radiusKm": 5,
+      "contactPhone": "+91 98765 43210",
+      "budgetAmount": 500,
+      "budgetPeriod": "daily",
+      "durationDays": 30,
+      "platformFee": 2499,
+      "adSpendAllowance": 0,
+      "status": "Draft",
+      "statusMessage": "Draft saved on server. Ready for ad network credential review.",
+      "planId": "growth",
+      "createdAt": "2026-10-12T15:05:38.193Z",
+      "updatedAt": "2026-10-12T15:05:38.193Z"
+    },
+    "cmp_280eb5bf-0": {
+      "name": "3BHK Luxury Rental Blast",
+      "type": "quickblast",
+      "category": "Rental Property",
+      "channel": "Instagram Reels & Feed",
+      "headline": "Spacious 3BHK Apartment for Rent",
+      "body": "Furnished 3BHK flat near Metro Station. Direct owner listing, zero brokerage.",
+      "location": "Indiranagar, Bengaluru",
+      "radiusKm": 5,
+      "contactPhone": "+91 99887 76655",
+      "budgetAmount": 1999,
+      "budgetPeriod": "flat_one_time",
+      "durationDays": 7,
+      "platformFee": 1499,
+      "adSpendAllowance": 500,
+      "status": "Draft",
+      "statusMessage": "Draft saved on server — platform publishing pending ad network credentials.",
+      "packageId": "starter",
+      "id": "cmp_280eb5bf-0",
+      "workspaceId": "ws_primary_growth",
+      "userId": "usr_default_admin",
+      "createdAt": "2026-10-12T15:05:53.067Z",
+      "updatedAt": "2026-10-12T15:05:53.067Z"
+    }
+  },
+  "leads": {
+    "ld_seed_01": {
+      "id": "ld_seed_01",
+      "workspaceId": "ws_primary_growth",
+      "userId": "usr_default_admin",
+      "name": "Ravi Patel",
+      "phone": "+91 98765 43210",
+      "email": "ravi.patel@example.com",
+      "source": "Instagram Reel Ad (5km)",
+      "stage": "Contacted",
+      "interest": "Root Canal Consultation",
+      "followUpDate": "Tomorrow, 11:00 AM",
+      "notes": "Inquired about weekend dental consult slots and digital OPG pricing.",
+      "timeline": [
+        {
+          "id": "t1",
+          "time": "10:14 AM",
+          "action": "Inquiry captured via WhatsApp lead link"
+        },
+        {
+          "id": "t2",
+          "time": "10:18 AM",
+          "action": "Sent fee schedule and clinic location on WhatsApp"
+        },
+        {
+          "id": "t3",
+          "time": "10:25 AM",
+          "action": "Moved stage to Contacted. Follow-up set for tomorrow"
+        }
+      ],
+      "isSample": true,
+      "createdAt": "2026-10-12T15:05:38.193Z",
+      "updatedAt": "2026-10-12T15:05:38.193Z"
+    },
+    "ld_252be14e-9": {
+      "name": "Amina Sheikh",
+      "phone": "+91 97112 34567",
+      "email": "amina@gmail.com",
+      "source": "Direct Walk-in",
+      "stage": "Qualified",
+      "interest": "Teeth Whitening Inquiry",
+      "notes": "Quoted ₹4,500 for laser whitening. Booking Saturday.",
+      "timeline": [
+        {
+          "id": "t_1791817570535",
+          "time": "Just now",
+          "action": "Lead record registered in workspace"
+        },
+        {
+          "id": "t_1791817578538",
+          "time": "Just now",
+          "action": "Stage transitioned from New to Qualified"
+        }
+      ],
+      "isSample": false,
+      "id": "ld_252be14e-9",
+      "workspaceId": "ws_primary_growth",
+      "userId": "usr_default_admin",
+      "createdAt": "2026-10-12T15:06:10.536Z",
+      "updatedAt": "2026-10-12T15:06:18.538Z"
+    }
+  }
+}
