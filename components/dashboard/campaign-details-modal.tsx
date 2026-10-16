@@ -61,17 +61,17 @@ export function CampaignDetailsModal({
   if (!isOpen || !campaign) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
       <div
         className="fixed inset-0"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-border bg-card shadow-2xl p-6 sm:p-8 space-y-6 z-10 text-xs">
+      <div className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-border bg-card shadow-2xl p-4 sm:p-8 space-y-5 sm:space-y-6 z-10 text-xs">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-border pb-4 gap-4">
-          <div className="space-y-1">
+        <div className="flex items-start justify-between border-b border-border pb-4 gap-3">
+          <div className="space-y-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] uppercase tracking-wider bg-primary/10 text-primary">
                 Local Business Campaign
@@ -88,7 +88,7 @@ export function CampaignDetailsModal({
                 {campaign.status}
               </span>
             </div>
-            <h2 className="text-xl font-extrabold text-foreground">{campaign.name}</h2>
+            <h2 className="text-lg sm:text-xl font-extrabold text-foreground truncate">{campaign.name}</h2>
             <div className="text-muted-foreground text-[11px] font-mono">
               Campaign ID: {campaign.id}
             </div>
@@ -104,7 +104,7 @@ export function CampaignDetailsModal({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-border gap-6 text-xs font-bold">
+        <div className="flex overflow-x-auto no-scrollbar border-b border-border gap-4 sm:gap-6 text-xs font-bold whitespace-nowrap -mx-1 px-1 sm:mx-0 sm:px-0">
           <button
             onClick={() => setActivePreviewTab("creative")}
             className={`pb-2.5 border-b-2 transition-all cursor-pointer ${
@@ -254,8 +254,8 @@ export function CampaignDetailsModal({
         )}
 
         {/* Footer Actions */}
-        <div className="pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+        <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             {campaign.status !== "Draft" && onToggleStatus && (
               <button
                 onClick={() =>
@@ -264,7 +264,7 @@ export function CampaignDetailsModal({
                     campaign.status === "Active" ? "Paused" : "Active"
                   )
                 }
-                className="px-4 py-2 rounded-xl border border-border text-foreground hover:bg-muted font-bold text-xs flex items-center gap-1.5 cursor-pointer transition-colors"
+                className="flex-1 sm:flex-initial px-4 py-2 rounded-xl border border-border text-foreground hover:bg-muted font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
               >
                 {campaign.status === "Active" ? (
                   <>
@@ -288,7 +288,7 @@ export function CampaignDetailsModal({
                     onClose();
                   }
                 }}
-                className="px-3.5 py-2 rounded-xl border border-red-500/20 text-red-600 dark:text-red-400 hover:bg-red-500/10 font-bold text-xs flex items-center gap-1.5 cursor-pointer transition-colors"
+                className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl border border-red-500/20 text-red-600 dark:text-red-400 hover:bg-red-500/10 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
               >
                 <Trash2 className="size-3.5" />
                 <span>Delete Draft</span>
@@ -298,7 +298,7 @@ export function CampaignDetailsModal({
 
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 cursor-pointer text-center"
           >
             Close Details
           </button>

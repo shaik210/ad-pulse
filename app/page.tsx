@@ -167,7 +167,7 @@ export default function HomePage() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] sm:leading-tight text-foreground">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.15] sm:leading-tight text-foreground">
             Run Local Ads. Capture Leads. <br className="hidden sm:inline" />
             <span className="text-primary">
               Grow Your Business.

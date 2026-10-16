@@ -54,15 +54,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-card/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
-          <div className="flex items-center justify-center size-9 rounded-xl bg-primary text-primary-foreground font-black text-lg shadow-xs group-hover:scale-105 transition-transform">
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0 group min-w-0">
+          <div className="flex items-center justify-center size-8 sm:size-9 rounded-xl bg-primary text-primary-foreground font-black text-base sm:text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
             A
           </div>
-          <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-extrabold tracking-tight text-foreground leading-none">
+          <div className="flex flex-col min-w-0">
+            <span className="text-base sm:text-lg font-extrabold tracking-tight text-foreground leading-none truncate">
               AdPulse
             </span>
-            <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-muted-foreground uppercase mt-0.5">
+            <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-muted-foreground uppercase mt-0.5 truncate hidden xs:block">
               Local Advertising OS & CRM
             </span>
           </div>
@@ -119,14 +119,14 @@ export function SiteHeader() {
         </nav>
 
         {/* Action CTAs: Log In, Sign Up, and Theme Toggle */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          {/* Log In Button */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          {/* Log In Button - Visible on sm and larger, available in drawer on mobile */}
           <button
             onClick={() => {
               setAuthModalMode("login");
               setAuthModalOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted font-bold text-xs transition-colors cursor-pointer shrink-0"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted font-bold text-xs transition-colors cursor-pointer shrink-0"
           >
             <KeyRound className="size-3.5" />
             <span>Log In</span>
@@ -138,18 +138,18 @@ export function SiteHeader() {
               setAuthModalMode("signup");
               setAuthModalOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 transition-opacity cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 transition-opacity cursor-pointer shrink-0"
           >
             <span>Sign Up</span>
-            <ArrowRight className="size-3.5" />
+            <ArrowRight className="size-3 sm:size-3.5" />
           </button>
 
           <div className="h-4 w-px bg-border/80 mx-0.5 hidden sm:block" />
 
-          {/* Theme Toggle (Right side, discreet icon) */}
+          {/* Theme Toggle (Discreet icon) */}
           <button
             onClick={toggleTheme}
-            className="size-9 flex items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
+            className="size-8 sm:size-9 flex items-center justify-center rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
             aria-label="Toggle light or dark theme"
             title="Toggle color theme"
           >
@@ -159,10 +159,10 @@ export function SiteHeader() {
           {/* Mobile Drawer Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden size-9 flex items-center justify-center rounded-xl border border-border text-foreground hover:bg-muted transition-colors shrink-0 cursor-pointer"
+            className="lg:hidden size-8 sm:size-9 flex items-center justify-center rounded-xl border border-border text-foreground hover:bg-muted transition-colors shrink-0 cursor-pointer"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {mobileMenuOpen ? <X className="size-4 sm:size-5" /> : <Menu className="size-4 sm:size-5" />}
           </button>
         </div>
       </div>

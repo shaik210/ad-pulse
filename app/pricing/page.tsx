@@ -269,46 +269,54 @@ export default function PricingPage() {
             </div>
 
             <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-xs">
-              <div className="grid grid-cols-12 bg-muted/60 p-4 font-bold text-xs border-b border-border text-foreground">
-                <div className="col-span-4 sm:col-span-3">Capability</div>
-                <div className="col-span-2 sm:col-span-3 text-center sm:text-left text-foreground">
-                  Basic (₹1,499)
-                </div>
-                <div className="col-span-3 sm:col-span-3 text-center sm:text-left text-primary font-extrabold">
-                  Growth (₹2,499)
-                </div>
-                <div className="col-span-3 sm:col-span-3 text-center sm:text-left text-foreground">
-                  Premium (₹4,999)
-                </div>
+              <div className="p-3 bg-primary/10 border-b border-primary/20 text-primary text-[11px] font-semibold flex items-center justify-between sm:hidden">
+                <span>Swipe table horizontally to compare all plans</span>
+                <span className="font-mono text-xs">→</span>
               </div>
-
-              <div className="divide-y divide-border text-xs">
-                {tierComparison.map((group, groupIdx) => (
-                  <React.Fragment key={groupIdx}>
-                    <div className="p-3.5 bg-background font-bold text-[11px] uppercase tracking-wider text-muted-foreground">
-                      {group.category}
+              <div className="overflow-x-auto no-scrollbar">
+                <div className="min-w-[640px]">
+                  <div className="grid grid-cols-12 bg-muted/60 p-4 font-bold text-xs border-b border-border text-foreground">
+                    <div className="col-span-3">Capability</div>
+                    <div className="col-span-3 text-left text-foreground">
+                      Basic (₹1,499)
                     </div>
-                    {group.items.map((item, itemIdx) => (
-                      <div
-                        key={itemIdx}
-                        className="grid grid-cols-12 p-4 items-center gap-2 hover:bg-muted/30 transition-colors"
-                      >
-                        <div className="col-span-4 sm:col-span-3 font-semibold text-foreground">
-                          {item.name}
+                    <div className="col-span-3 text-left text-primary font-extrabold">
+                      Growth (₹2,499)
+                    </div>
+                    <div className="col-span-3 text-left text-foreground">
+                      Premium (₹4,999)
+                    </div>
+                  </div>
+
+                  <div className="divide-y divide-border text-xs">
+                    {tierComparison.map((group, groupIdx) => (
+                      <React.Fragment key={groupIdx}>
+                        <div className="p-3.5 bg-background font-bold text-[11px] uppercase tracking-wider text-muted-foreground">
+                          {group.category}
                         </div>
-                        <div className="col-span-2 sm:col-span-3 text-muted-foreground">
-                          {item.basic}
-                        </div>
-                        <div className="col-span-3 sm:col-span-3 text-foreground font-semibold">
-                          {item.growth}
-                        </div>
-                        <div className="col-span-3 sm:col-span-3 text-muted-foreground">
-                          {item.premium}
-                        </div>
-                      </div>
+                        {group.items.map((item, itemIdx) => (
+                          <div
+                            key={itemIdx}
+                            className="grid grid-cols-12 p-4 items-center gap-2 hover:bg-muted/30 transition-colors"
+                          >
+                            <div className="col-span-3 font-semibold text-foreground">
+                              {item.name}
+                            </div>
+                            <div className="col-span-3 text-muted-foreground">
+                              {item.basic}
+                            </div>
+                            <div className="col-span-3 text-foreground font-semibold">
+                              {item.growth}
+                            </div>
+                            <div className="col-span-3 text-muted-foreground">
+                              {item.premium}
+                            </div>
+                          </div>
+                        ))}
+                      </React.Fragment>
                     ))}
-                  </React.Fragment>
-                ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

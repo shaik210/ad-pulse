@@ -87,9 +87,9 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-muted-foreground">
+        <div className="pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-muted-foreground text-center sm:text-left">
           <div>Local Advertising OS • Built for Indian storefronts, clinics & service businesses</div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
             <Link href="/" className="hover:text-foreground">Home</Link>
             <Link href="/#how-it-works" className="hover:text-foreground">How It Works</Link>
             <Link href="/pricing" className="hover:text-foreground">Pricing</Link>

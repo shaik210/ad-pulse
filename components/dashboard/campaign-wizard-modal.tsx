@@ -145,19 +145,19 @@ export function CampaignWizardModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs font-sans animate-in fade-in">
-      <div className="w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs font-sans animate-in fade-in">
+      <div className="w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[90vh] overflow-hidden">
         {/* Wizard Top Header */}
-        <div className="flex items-center justify-between p-5 border-b border-border bg-muted/30">
-          <div className="flex items-center gap-2.5">
-            <div className="size-8 rounded-xl flex items-center justify-center text-primary-foreground bg-primary text-xs font-bold">
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-border bg-muted/30">
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <div className="size-8 rounded-xl flex items-center justify-center text-primary-foreground bg-primary text-xs font-bold shrink-0">
               <Building2 className="size-4" />
             </div>
-            <div>
-              <h2 className="text-base font-bold text-foreground">
+            <div className="min-w-0">
+              <h2 className="text-sm sm:text-base font-bold text-foreground truncate">
                 New Local Business Ad Campaign
               </h2>
-              <span className="text-[11px] text-muted-foreground block">
+              <span className="text-[10px] sm:text-[11px] text-muted-foreground block truncate">
                 Step {step} of 4 • {step === 1 ? "Category & Plan" : step === 2 ? "Creative & Targeting" : step === 3 ? "Ad Preview" : "Fee Breakdown & Confirmation"}
               </span>
             </div>
@@ -165,7 +165,7 @@ export function CampaignWizardModal({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
             aria-label="Close dialog"
           >
             <X className="size-5" />
@@ -173,7 +173,7 @@ export function CampaignWizardModal({
         </div>
 
         {/* Wizard Body Steps */}
-        <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 text-xs">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 flex-1 text-xs">
           {errorMessage && (
             <div className="p-3.5 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs flex items-center gap-2">
               <AlertCircle className="size-4 shrink-0" />
@@ -289,7 +289,7 @@ export function CampaignWizardModal({
                       <span className="text-[10px] text-muted-foreground font-mono">1-Click Apply</span>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex overflow-x-auto no-scrollbar sm:flex-wrap gap-1.5 pb-1 -mx-1 px-1 sm:mx-0 sm:px-0">
                       <button
                         type="button"
                         onClick={() => {
@@ -297,7 +297,7 @@ export function CampaignWizardModal({
                           setHeadline("Painless Root Canal & Smile Checkup — 30% Off");
                           setBodyText("Pain-free single-sitting RCT by certified specialists. Free digital OPG consultation within 5km.");
                         }}
-                        className="px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
+                        className="shrink-0 px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
                       >
                         <Sparkles className="size-3 text-primary" />
                         <span>Dental Clinic</span>
@@ -310,7 +310,7 @@ export function CampaignWizardModal({
                           setHeadline("Keratin & Deluxe Hair Spa — Flat ₹1,499 This Week");
                           setBodyText("Frizz-free, salon-finish hair in 60 minutes. Premium organic products used by senior stylists within 5km.");
                         }}
-                        className="px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
+                        className="shrink-0 px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
                       >
                         <Sparkles className="size-3 text-primary" />
                         <span>Salon & Spa</span>
@@ -323,7 +323,7 @@ export function CampaignWizardModal({
                           setHeadline("Transform Your Fitness: 3-Day Free Trial Pass");
                           setBodyText("Full gym floor access, cardio zone, certified personal trainers, and steam room. 5km neighborhood booking.");
                         }}
-                        className="px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
+                        className="shrink-0 px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
                       >
                         <Sparkles className="size-3 text-primary" />
                         <span>Gym & Fitness</span>
@@ -336,7 +336,7 @@ export function CampaignWizardModal({
                           setHeadline("Artisan Wood-Fired Pizza & Pasta Feast");
                           setBodyText("Hand-stretched sourdough pizza baked at 450°C. Family dinner combos starting at ₹899 with mocktails.");
                         }}
-                        className="px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
+                        className="shrink-0 px-2.5 py-1 rounded-lg border border-border bg-background hover:border-primary/50 text-[11px] font-semibold text-foreground transition-all cursor-pointer flex items-center gap-1"
                       >
                         <Sparkles className="size-3 text-primary" />
                         <span>Restaurant</span>
@@ -349,7 +349,7 @@ export function CampaignWizardModal({
                           setHeadline("Exclusive Local Neighborhood Special — Limited Slots");
                           setBodyText("Designed with Canva 1080x1920 Reel template. Direct WhatsApp consultation and booking.");
                         }}
-                        className="px-2.5 py-1 rounded-lg border border-primary/30 bg-primary/5 hover:bg-primary/10 text-[11px] font-bold text-primary transition-all cursor-pointer flex items-center gap-1"
+                        className="shrink-0 px-2.5 py-1 rounded-lg border border-primary/30 bg-primary/5 hover:bg-primary/10 text-[11px] font-bold text-primary transition-all cursor-pointer flex items-center gap-1"
                       >
                         <Layers className="size-3 text-primary" />
                         <span>Canva 9:16 Preset</span>

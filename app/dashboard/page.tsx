@@ -856,8 +856,9 @@ export default function DashboardPage() {
       {/* 1. Left Sidebar Navigation */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border
+          fixed inset-y-0 left-0 z-50 w-72 sm:w-64 bg-card border-r border-border
           flex flex-col justify-between transition-transform duration-200 ease-in-out
+          max-h-screen overflow-y-auto no-scrollbar
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
           md:translate-x-0 md:static md:inset-auto md:min-h-screen
         `}
@@ -878,7 +879,7 @@ export default function DashboardPage() {
               </div>
             </Link>
             <button
-              className="md:hidden p-1.5 rounded-lg hover:bg-muted text-muted-foreground"
+              className="md:hidden p-1.5 rounded-lg hover:bg-muted text-muted-foreground cursor-pointer"
               onClick={() => setSidebarOpen(false)}
               aria-label="Close navigation sidebar"
             >
@@ -982,20 +983,20 @@ export default function DashboardPage() {
       {/* 2. Main Content View Area */}
       <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         {/* Header */}
-        <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8 bg-card/90 backdrop-blur-md border-b border-border">
-          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-3 sm:px-6 lg:px-8 bg-card/90 backdrop-blur-md border-b border-border">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-xl border border-border md:hidden text-foreground hover:bg-muted shrink-0"
+              className="p-2 rounded-xl border border-border md:hidden text-foreground hover:bg-muted shrink-0 cursor-pointer"
               aria-label="Open navigation sidebar"
             >
               <Menu className="size-5" />
             </button>
             <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-              <h1 className="text-sm sm:text-base font-bold tracking-tight text-foreground capitalize flex items-center gap-1.5 sm:gap-2 truncate">
+              <h1 className="text-xs sm:text-base font-bold tracking-tight text-foreground capitalize flex items-center gap-1.5 sm:gap-2 truncate">
                 <span className="truncate">{activeTab === "billing" ? "Billing & Spend" : activeTab.replace("-", " ")}</span>
                 <span className="text-muted-foreground font-normal text-xs shrink-0">/</span>
-                <span className="text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full font-bold border bg-primary/10 text-primary border-primary/20 shrink-0 hidden sm:inline-flex">
+                <span className="text-[11px] sm:text-xs px-2 py-0.5 rounded-full font-bold border bg-primary/10 text-primary border-primary/20 shrink-0 hidden sm:inline-flex">
                   Local Business OS
                 </span>
               </h1>
@@ -1009,20 +1010,51 @@ export default function DashboardPage() {
                 setWizardMode("business");
                 setIsWizardOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 transition-opacity cursor-pointer shrink-0"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 transition-opacity cursor-pointer shrink-0"
             >
               <Plus className="size-4" />
-              <span>Create Campaign</span>
+              <span><span className="hidden xs:inline sm:inline">Create </span>Campaign</span>
             </button>
           </div>
         </header>
 
+        {/* Mobile Quick Tab Navigation Bar */}
+        <div className="md:hidden border-b border-border bg-card/80 backdrop-blur-md px-3 py-2 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 shrink-0 transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-primary text-primary-foreground font-bold shadow-xs"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                }`}
+              >
+                <Icon className="size-3.5 shrink-0" />
+                <span>{item.name}</span>
+                {item.badge && (
+                  <span
+                    className={`px-1.5 py-0.2 rounded-full text-[9px] font-mono font-bold ${
+                      isActive ? "bg-primary-foreground/20 text-primary-foreground" : "bg-primary/10 text-primary"
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Banner Notice */}
-        <div className="bg-primary/10 border-b border-primary/20 px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between text-xs text-muted-foreground">
+        <div className="bg-primary/10 border-b border-primary/20 px-3.5 sm:px-6 lg:px-8 py-2 flex items-center justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-2 min-w-0">
             <Info className="size-4 text-primary shrink-0" />
-            <span className="truncate">
-              <strong>Local Business OS:</strong> Manage 5km local ad campaigns across Meta Ads & Google Ads with integrated WhatsApp CRM.
+            <span className="truncate text-[11px] sm:text-xs">
+              <strong>Local Business OS:</strong> Manage 5km ad campaigns across Meta & Google with WhatsApp CRM.
             </span>
           </div>
           <span className="font-mono text-[10px] text-primary font-semibold hidden md:inline shrink-0 ml-3">
@@ -1031,52 +1063,52 @@ export default function DashboardPage() {
         </div>
 
         {/* MAIN BODY CONTENT */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 w-full max-w-[1600px] 2xl:max-w-full mx-auto">
+        <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 w-full max-w-[1600px] 2xl:max-w-full mx-auto">
           {/* TAB 1: OVERVIEW */}
           {activeTab === "overview" && (
             <>
               {/* LOCAL BUSINESS OVERVIEW */}
               <div className="space-y-8">
                   {/* Growth Metrics Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <div className="p-5 rounded-2xl border border-border bg-card shadow-xs space-y-2">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+                    <div className="p-3.5 sm:p-5 rounded-2xl border border-border bg-card shadow-xs space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between text-muted-foreground text-xs font-semibold">
-                        <span>Customer Inquiries</span>
-                        <MessageCircle className="size-4 text-primary" />
+                        <span className="truncate">Customer Inquiries</span>
+                        <MessageCircle className="size-4 text-primary shrink-0" />
                       </div>
-                      <div className="text-3xl font-extrabold text-foreground">{leads.length}</div>
-                      <div className="text-[11px] text-primary font-semibold flex items-center gap-1">
+                      <div className="text-2xl sm:text-3xl font-extrabold text-foreground">{leads.length}</div>
+                      <div className="text-[10px] sm:text-[11px] text-primary font-semibold flex items-center gap-1 truncate">
                         <span>Persistent in Database</span>
                       </div>
                     </div>
 
-                    <div className="p-5 rounded-2xl border border-border bg-card shadow-xs space-y-2">
+                    <div className="p-3.5 sm:p-5 rounded-2xl border border-border bg-card shadow-xs space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between text-muted-foreground text-xs font-semibold">
-                        <span>Cost Per Inquiry</span>
-                        <BarChart3 className="size-4 text-primary" />
+                        <span className="truncate">Cost Per Inquiry</span>
+                        <BarChart3 className="size-4 text-primary shrink-0" />
                       </div>
-                      <div className="text-3xl font-extrabold text-foreground">₹110</div>
-                      <div className="text-[11px] text-muted-foreground">Average across Meta & Google</div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-foreground">₹110</div>
+                      <div className="text-[10px] sm:text-[11px] text-muted-foreground truncate">Average across Meta & Google</div>
                     </div>
 
-                    <div className="p-5 rounded-2xl border border-border bg-card shadow-xs space-y-2">
+                    <div className="p-3.5 sm:p-5 rounded-2xl border border-border bg-card shadow-xs space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between text-muted-foreground text-xs font-semibold">
-                        <span>Active Campaigns</span>
-                        <Megaphone className="size-4 text-primary" />
+                        <span className="truncate">Active Campaigns</span>
+                        <Megaphone className="size-4 text-primary shrink-0" />
                       </div>
-                      <div className="text-3xl font-extrabold text-foreground">{campaigns.length}</div>
-                      <div className="text-[11px] text-muted-foreground">Stored drafts & active</div>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-foreground">{campaigns.length}</div>
+                      <div className="text-[10px] sm:text-[11px] text-muted-foreground truncate">Stored drafts & active</div>
                     </div>
 
-                    <div className="p-5 rounded-2xl border border-border bg-card shadow-xs space-y-2">
+                    <div className="p-3.5 sm:p-5 rounded-2xl border border-border bg-card shadow-xs space-y-1.5 sm:space-y-2">
                       <div className="flex items-center justify-between text-muted-foreground text-xs font-semibold">
-                        <span>Converted Leads</span>
-                        <CheckCircle2 className="size-4 text-primary" />
+                        <span className="truncate">Converted Leads</span>
+                        <CheckCircle2 className="size-4 text-primary shrink-0" />
                       </div>
-                      <div className="text-3xl font-extrabold text-foreground">
+                      <div className="text-2xl sm:text-3xl font-extrabold text-foreground">
                         {leads.filter((l) => l.stage === "Converted").length}
                       </div>
-                      <div className="text-[11px] text-primary font-semibold">
+                      <div className="text-[10px] sm:text-[11px] text-primary font-semibold truncate">
                         CRM Pipeline Progress
                       </div>
                     </div>
@@ -1289,16 +1321,16 @@ export default function DashboardPage() {
 
           {/* TAB 2: LEADS & CRM WORKSPACE (PHASE 2C FUNCTIONAL CRM) */}
           {activeTab === "leads" && (
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               {/* Controls Bar */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-card p-4 rounded-2xl border border-border">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 bg-card p-3.5 sm:p-4 rounded-2xl border border-border">
                 <div className="relative flex-1">
                   <Search className="absolute left-3.5 top-2.5 size-4 text-muted-foreground" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search inquiries by customer name, phone, or service interest..."
+                    placeholder="Search inquiries by customer name, phone, or interest..."
                     className="w-full pl-10 pr-4 py-2 rounded-xl border border-border bg-background text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
@@ -1308,7 +1340,7 @@ export default function DashboardPage() {
                   <select
                     value={leadRecordType}
                     onChange={(e) => setLeadRecordType(e.target.value as any)}
-                    className="px-3 py-2 rounded-xl border border-border bg-background text-xs font-semibold text-foreground focus:outline-none"
+                    className="flex-1 sm:flex-initial px-3 py-2 rounded-xl border border-border bg-background text-xs font-semibold text-foreground focus:outline-none"
                   >
                     <option value="all">All Records ({leads.length})</option>
                     <option value="active">Active Real Leads ({leads.filter((l) => !l.isSample).length})</option>
@@ -1318,7 +1350,7 @@ export default function DashboardPage() {
                   <select
                     value={stageFilter}
                     onChange={(e) => setStageFilter(e.target.value)}
-                    className="px-3 py-2 rounded-xl border border-border bg-background text-xs text-foreground focus:outline-none"
+                    className="flex-1 sm:flex-initial px-3 py-2 rounded-xl border border-border bg-background text-xs text-foreground focus:outline-none"
                   >
                     <option value="all">All Stages</option>
                     <option value="New">New</option>
@@ -1330,7 +1362,7 @@ export default function DashboardPage() {
 
                   <button
                     onClick={() => setIsNewLeadModalOpen(true)}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 cursor-pointer"
                   >
                     <UserPlus className="size-3.5" />
                     <span>+ Add Inquiry</span>
@@ -1339,11 +1371,15 @@ export default function DashboardPage() {
               </div>
 
               {/* KANBAN BOARD */}
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 overflow-x-auto pb-4">
+              <div className="text-[11px] text-muted-foreground flex items-center justify-between md:hidden font-mono px-1">
+                <span>6 CRM Stages</span>
+                <span>← Swipe to explore pipeline →</span>
+              </div>
+              <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 pb-4 snap-x no-scrollbar -mx-1 px-1 sm:mx-0 sm:px-0">
                 {(["New", "Contacted", "Qualified", "Converted", "Lost", "Invalid"] as const).map((stage) => {
                   const stageLeads = filteredLeads.filter((l) => l.stage === stage);
                   return (
-                    <div key={stage} className="p-4 rounded-2xl border border-border bg-card min-w-[210px] space-y-3 flex flex-col justify-between">
+                    <div key={stage} className="p-3.5 sm:p-4 rounded-2xl border border-border bg-card min-w-[270px] sm:min-w-[280px] md:min-w-0 snap-start shrink-0 md:shrink space-y-3 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between border-b border-border pb-2.5 text-xs font-bold text-foreground">
                           <span>{stage}</span>
@@ -1404,7 +1440,7 @@ export default function DashboardPage() {
 
               {/* LEAD DRAWER */}
               {selectedLead && (
-                <div className="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-card border-l border-border p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
+                <div className="fixed inset-y-0 right-0 z-50 w-full sm:max-w-md bg-card border-l border-border p-4 sm:p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between border-b border-border pb-4">
                       <div>

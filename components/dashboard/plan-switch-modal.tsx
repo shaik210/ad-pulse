@@ -46,17 +46,17 @@ export function PlanSwitchModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
       <div className="fixed inset-0" onClick={onClose} aria-hidden="true" />
 
-      <div className="relative w-full max-w-2xl rounded-3xl border border-border bg-card shadow-2xl p-6 sm:p-8 space-y-6 z-10 text-xs">
+      <div className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-border bg-card shadow-2xl p-4 sm:p-8 space-y-5 sm:space-y-6 z-10 text-xs">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-border pb-4">
-          <div className="space-y-1">
+        <div className="flex items-start justify-between border-b border-border pb-4 gap-3">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
               Subscription Management
             </span>
-            <h2 className="text-xl font-extrabold text-foreground">
+            <h2 className="text-lg sm:text-xl font-extrabold text-foreground truncate">
               Select Business Growth Plan
             </h2>
             <p className="text-xs text-muted-foreground">
@@ -65,7 +65,7 @@ export function PlanSwitchModal({
           </div>
           <button
             onClick={onClose}
-            className="size-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="size-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer shrink-0"
           >
             <X className="size-4" />
           </button>
@@ -83,7 +83,7 @@ export function PlanSwitchModal({
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {BUSINESS_SAAS_PLANS.map((plan) => {
                 const isSelected = selectedPlan === plan.id;
                 const isCurrent = currentPlanId === plan.id;
@@ -92,7 +92,7 @@ export function PlanSwitchModal({
                   <div
                     key={plan.id}
                     onClick={() => setSelectedPlan(plan.id)}
-                    className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-4 ${
+                    className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-3 sm:space-y-4 ${
                       isSelected
                         ? "border-primary bg-primary/5 shadow-md ring-2 ring-primary/20"
                         : "border-border bg-background hover:border-foreground/20"
@@ -135,11 +135,11 @@ export function PlanSwitchModal({
               </span>
             </div>
 
-            <div className="pt-4 border-t border-border flex items-center justify-end gap-3">
+            <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl border border-border hover:bg-muted text-foreground font-bold text-xs cursor-pointer"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl border border-border hover:bg-muted text-foreground font-bold text-xs cursor-pointer text-center"
               >
                 Cancel
               </button>
@@ -147,7 +147,7 @@ export function PlanSwitchModal({
                 type="button"
                 onClick={handleConfirm}
                 disabled={isUpdating || selectedPlan === currentPlanId}
-                className="px-5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-xs hover:opacity-95 flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 text-center"
               >
                 {isUpdating && <Loader2 className="size-3.5 animate-spin" />}
                 <span>{selectedPlan === currentPlanId ? "Current Plan" : "Confirm Plan Change"}</span>
